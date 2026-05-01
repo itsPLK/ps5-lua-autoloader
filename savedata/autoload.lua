@@ -189,13 +189,26 @@ function main()
             print(string.format("Sleeping for: %s ms", sleep_time))
             sleep(sleep_time, "ms")
 
-        elseif config_line:sub(-4) == ".elf" or config_line:sub(-4) == ".bin" then
-            -- error if elfldr is in autoload.txt
-            if config_line == "elfldr.elf" or config_line == "elfldr.bin" then
-                print("[ERROR] Remove elfldr from autoload.txt")
-                send_ps_notification("[ERROR] Remove elfldr from autoload.txt")
-                return
+        elseif config_line == "elfldr.elf" then
+            local full_path = existing_path .. config_line
+            if not elf_loader_active then
+                if file_exists(full_path) then
+                    print("Starting ELF Loader from:", full_path)
+                    send_ps_notification("Starting ELF Loader from: \n" .. full_path)
+                    start_elf_loader(full_path)
+                    sleep(4000, "ms")
+                    if not elf_loader_active then
+                        print("[-] elf loader not active, cannot send elf")
+                        send_ps_notification("[-] elf loader not active, cannot send elf")
+                        return
+                    end
+                else
+                    print("[ERROR] File not found:", full_path)
+                    send_ps_notification("[ERROR] File not found: \n" .. full_path)
+                end
             end
+
+        elseif config_line:sub(-4) == ".elf" or config_line:sub(-4) == ".bin" then
             local full_path = existing_path .. config_line
             if file_exists(full_path) then
                 -- Load the ELF file and send it to localhost on port 9021

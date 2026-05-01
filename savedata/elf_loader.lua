@@ -228,7 +228,7 @@ end
 
 
 
-function start_elf_loader()
+function start_elf_loader(custom_path)
 
     if elf_loader_active then
         print("elf_loader already loaded")
@@ -250,26 +250,26 @@ function start_elf_loader()
         local elf_dirname = elf_loader.options.elf_dirname
         local elf_filename = elf_loader.options.elf_filename
 
-        -- Build possible paths, prioritizing USBs first, then /data, then savedata
-        local possible_paths = {}
-        for i = 0, 7 do
-            table.insert(possible_paths, string.format("/mnt/usb%d/%s/%s", i, elf_dirname, elf_filename))
-        end
-        table.insert(possible_paths, string.format("/data/%s/%s", elf_dirname, elf_filename))
-        table.insert(possible_paths, get_savedata_path() .. elf_dirname .. "/" .. elf_filename)
-        table.insert(possible_paths, get_savedata_path() .. elf_filename)
+        local existing_path = custom_path
 
-        local existing_path = nil
-        for _, path in ipairs(possible_paths) do
-            if file_exists(path) then
-                existing_path = path
-                break
+        if not existing_path then
+            -- ONLY look in savedata if no custom path is provided
+            local possible_paths = {
+                get_savedata_path() .. elf_dirname .. "/" .. elf_filename,
+                get_savedata_path() .. elf_filename
+            }
+
+            for _, path in ipairs(possible_paths) do
+                if file_exists(path) then
+                    existing_path = path
+                    break
+                end
             end
         end
 
         if not existing_path then
-            send_ps_notification("Error: " .. elf_filename .. " not found in any known location\nPlease place it in /data or in root of USB drive")
-            errorf("file not exist in any known location")
+            send_ps_notification("Error: " .. elf_filename .. " not found in savedata\nPlease place it in /data/lib/savedata/" .. get_title_id() .. " or specify it in autoload.txt")
+            errorf("file not exist in savedata")
         end
 
         elf_loader_active = true

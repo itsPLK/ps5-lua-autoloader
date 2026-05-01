@@ -50,7 +50,35 @@ Currently this loader is compatible with the following games:
 
 ## Updating Savedata
 
-If you have the savedata setup and want to update the files, please refer [UPDATE.md](UPDATE.md)
+If you have the savedata setup and want to update the files, please refer to [UPDATE.md](UPDATE.md).
+
+
+## Additional Info
+
+<Details>
+<Summary><i>How to use a custom ELF Loader version?</i></Summary>
+
+By default, the autoloader uses a custom version of **elfldr** that only accepts connections from the PS5 itself (localhost). This improves security by preventing other devices on your network from sending payloads to your console.
+
+If you want to use a "normal" ELF Loader that allows sending payloads from any device:
+1. Place your `elfldr.elf` in the `ps5_autoloader` directory.
+2. Add `elfldr.elf` as the **first** line in your `autoload.txt`.
+</Details>
+
+<Details>
+<Summary><i>etaHEN loading stability issues</i></Summary>
+
+Sometimes etaHEN will fail to load. It seems that etaHEN/kstuff often won't finish loading until the game app is closed.
+
+**Recommended Solution:**
+The autoloader includes **Payload Manager**. Using it is the most reliable way to load etaHEN/kstuff, as it waits for the game app to close before sending the payloads. To use it, make `pldmgr.elf` the **only** item in your `autoload.txt`.
+
+**Alternative Workarounds:**
+- Disable etaHEN toolbox automatic injecting.
+- Load etaHEN without kstuff and then load kstuff separately.
+- Minimize the game app (by holding the PS button) after running lapse but before etaHEN loads.
+- Add a delay before loading etaHEN to give yourself more time to minimize.
+</Details>
 
 
 ## Credits
@@ -64,4 +92,5 @@ If you have the savedata setup and want to update the files, please refer [UPDAT
 * al-azif - parts and information grabbed from his sdk, aswell as from his ftp server
 * horror - for the notification popup and ftp server payloads
 * everyone else who shared their knowledge with the community
+
 
