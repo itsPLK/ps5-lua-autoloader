@@ -1,10 +1,15 @@
+<h1 align="center">PS5 Lua Autoloader</h1>
+<h3 align="center">Fork of <a href="https://github.com/shahrilnet/remote_lua_loader">remote_lua_loader</a></h3>
+&nbsp;
+<p align="center">Automatically loads your .elf, .bin and .lua payloads.<br>Supports PS5 firmwares up to 10.01.</p>
 
-## PS5 Lua Autoloader
+<p align="center">
+    <b>Other Autoloaders:</b><br>
+    <a href="https://github.com/itsPLK/ps5-y2jb-autoloader">PS5 Y2JB Autoloader</a> | 
+    <a href="https://github.com/itsPLK/ps5-bdjb-autoloader">PS5 BD-JB Autoloader</a>
+</p>
 
-Fork of [remote_lua_loader](https://github.com/shahrilnet/remote_lua_loader)
 
-Automatically loads kernel exploit, elf_loader, your elf payloads, and Lua scripts.
-Supports PS5 firmwares up to 10.01
 
 ## How to use
 * Create a directory named `ps5_autoloader`.
@@ -12,7 +17,7 @@ Supports PS5 firmwares up to 10.01
     * In autoload.txt, list the files you want to load (one per line).
     * Filenames are case-sensitive - make sure the names exactly match your files.
     * You can add lines like `!1000` to make the loader wait 1000ms before sending the next payload.
-    * Note: Do not put kernel exploit (e.g. `umtx.lua`) or elfloader in `autoload.txt`, as they are loaded automatically.
+    * Note: Do not put kernel exploit or elfldr in `autoload.txt`, as they are loaded automatically.
 * Put the `ps5_autoloader` directory in one of these locations:
     * In the root of a USB drive
     * In the internal drive at `/data/ps5_autoloader`
@@ -93,4 +98,17 @@ The autoloader includes **Payload Manager**. Using it is the most reliable way t
 * horror - for the notification popup and ftp server payloads
 * everyone else who shared their knowledge with the community
 
+## Disclaimer
 
+This tool is provided as-is for research and development purposes only. Use at your own risk. The developers are not responsible for any damage, data loss, or consequences resulting from the use of this software.
+
+
+## License
+
+This project is licensed under the **GPL-3.0 License**.
+
+The original project by shahrilnet did not include an explicit LICENSE file.  
+All unique modifications and additions in this fork are licensed under **GPL-3.0**.
+
+## Donate
+- [donate to PLK](DONATE.md)
