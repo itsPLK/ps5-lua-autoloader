@@ -96,6 +96,7 @@ The autoloader includes **Payload Manager**. Using it is the most reliable way t
 * specter & chendo - for webkit implementations referenced a lot
 * al-azif - parts and information grabbed from his sdk, aswell as from his ftp server
 * horror - for the notification popup and ftp server payloads
+* ufm42 - for kexp
 * everyone else who shared their knowledge with the community
 
 ## Disclaimer
