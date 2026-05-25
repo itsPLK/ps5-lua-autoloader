@@ -11,7 +11,7 @@ elf_loader = {}
 
 elf_loader.options = {
     elf_dirname = "ps5_lua_loader", -- directory where elfldr.elf is located
-    elf_filename = "elfldr.elf",
+    elf_filename = "@@ELFLDR_FILE@@",
 }
 
 elf_loader.__index = elf_loader
