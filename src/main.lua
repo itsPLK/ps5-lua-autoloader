@@ -1,5 +1,6 @@
 
 FORCE_LAPSE_EXPLOIT = false
+FORCE_P2JB_EXPLOIT = false
 SHOW_DEBUG_NOTIFICATIONS = true
 
 LUA_LOADER_VERSION = "@@VERSION@@"
@@ -412,12 +413,16 @@ function main()
         return
     end
 
-    if FORCE_LAPSE_EXPLOIT then
+    if FORCE_P2JB_EXPLOIT then
+        kernel_exploit_lua = "p2jb.lua"
+    elseif FORCE_LAPSE_EXPLOIT then
         kernel_exploit_lua = "lapse.lua"
     elseif tonumber(FW_VERSION) <= 7.61 then
         kernel_exploit_lua = "umtx.lua"
     elseif tonumber(FW_VERSION) <= 10.01 then
         kernel_exploit_lua = "lapse.lua"
+    elseif tonumber(FW_VERSION) <= 12.70 then
+        kernel_exploit_lua = "p2jb.lua"
     else
         notify(string.format("Unsupported firmware version (%s %s)", PLATFORM, FW_VERSION))
         return
