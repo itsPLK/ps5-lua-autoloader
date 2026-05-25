@@ -16,6 +16,7 @@ ZIP_FILE     := $(ZIP_DIR_NAME).zip
 
 SRC_FILES := $(shell find src -type f)
 ELFLDR_FILE := $(shell basename $(shell ls src/elfldr-ps5-*.elf 2>/dev/null | head -n 1) 2>/dev/null)
+KEXP_FILE := $(shell basename $(shell ls src/kexp-*.bin 2>/dev/null | head -n 1) 2>/dev/null)
 
 all: $(ZIP_FILE)
 
@@ -27,6 +28,9 @@ $(ZIP_FILE): $(SRC_FILES)
 	sed -i.bak "s/@@VERSION@@/$(RELEASE_VERSION)/g" build_dir/$(ZIP_DIR_NAME)/main.lua && rm build_dir/$(ZIP_DIR_NAME)/main.lua.bak
 	# Replace elfldr filename in elf_loader.lua
 	sed -i.bak "s/@@ELFLDR_FILE@@/$(ELFLDR_FILE)/g" build_dir/$(ZIP_DIR_NAME)/elf_loader.lua && rm build_dir/$(ZIP_DIR_NAME)/elf_loader.lua.bak
+	# Replace elfldr and kexp filenames in p2jb.lua
+	sed -i.bak "s/@@ELFLDR_FILE@@/$(ELFLDR_FILE)/g" build_dir/$(ZIP_DIR_NAME)/p2jb.lua && rm build_dir/$(ZIP_DIR_NAME)/p2jb.lua.bak
+	sed -i.bak "s/@@KEXP_FILE@@/$(KEXP_FILE)/g" build_dir/$(ZIP_DIR_NAME)/p2jb.lua && rm build_dir/$(ZIP_DIR_NAME)/p2jb.lua.bak
 	(cd build_dir && zip -r ../$(ZIP_FILE) $(ZIP_DIR_NAME))
 	rm -rf build_dir
 	echo "Created $(ZIP_FILE)"

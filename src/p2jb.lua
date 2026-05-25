@@ -1180,14 +1180,21 @@ local function p2jb()
             local pthread_create = fcall(dlsym(LIBKERNEL_HANDLE, "scePthreadCreate"))
             local pthread_join   = fcall(dlsym(LIBKERNEL_HANDLE, "scePthreadJoin"))
 
-            local elfldr_savedata_path = string.format("/mnt/sandbox/%s_000/savedata0/elfldr-ps5.elf", get_title_id())
-            local kexp_savedata_path = string.format("/mnt/sandbox/%s_000/savedata0/kexp.bin", get_title_id())
+            local elfldr_filename = "@@ELFLDR_FILE@@"
+            local kexp_filename = "@@KEXP_FILE@@"
+
+            local elfldr_savedata_path = string.format("/mnt/sandbox/%s_000/savedata0/%s", get_title_id(), elfldr_filename)
+            local kexp_savedata_path = string.format("/mnt/sandbox/%s_000/savedata0/%s", get_title_id(), kexp_filename)
 
             local elfldr_path = ""
-            if file_exists("/data/elfldr-ps5.elf") then
+            if file_exists("/data/" .. elfldr_filename) then
+                elfldr_path = "/data/" .. elfldr_filename
+            elseif file_exists("/data/elfldr-ps5.elf") then
                 elfldr_path = "/data/elfldr-ps5.elf"
             elseif file_exists(elfldr_savedata_path) then
                 elfldr_path = elfldr_savedata_path
+            elseif file_exists(string.format("/mnt/sandbox/%s_000/savedata0/elfldr-ps5.elf", get_title_id())) then
+                elfldr_path = string.format("/mnt/sandbox/%s_000/savedata0/elfldr-ps5.elf", get_title_id())
             else
                 send_ps_notification("elfldr.elf not found in save data or /data/ path. Make sure it's there.")
                 error("elfldr.elf not found in save data or /data/ path. Make sure it's there.")
@@ -1198,10 +1205,14 @@ local function p2jb()
 
 
             local kexp_path = ""
-            if file_exists("/data/kexp.bin") then
+            if file_exists("/data/" .. kexp_filename) then
+                kexp_path = "/data/" .. kexp_filename
+            elseif file_exists("/data/kexp.bin") then
                 kexp_path = "/data/kexp.bin"
             elseif file_exists(kexp_savedata_path) then
                 kexp_path = kexp_savedata_path
+            elseif file_exists(string.format("/mnt/sandbox/%s_000/savedata0/kexp.bin", get_title_id())) then
+                kexp_path = string.format("/mnt/sandbox/%s_000/savedata0/kexp.bin", get_title_id())
             else
                 send_ps_notification("kexp.bin not found in save data or /data/ path. Make sure it's there.")
                 error("kexp.bin not found in save data or /data/ path. Make sure it's there.")
@@ -1261,7 +1272,13 @@ if PLATFORM ~= "ps5" or tonumber(FW_VERSION) > 12.70 then
     printf("this exploit only works on ps5 (fw <= 12.70) (current %s %s)", PLATFORM, FW_VERSION)
     send_ps_notification("this exploit only works on ps5 (fw <= 12.70) (current %s %s)", PLATFORM, FW_VERSION)
 else
-    if not file_exists("/savedata0/elfldr-ps5.elf") or not file_exists("/savedata0/kexp.bin") then
+    local elfldr_filename = "@@ELFLDR_FILE@@"
+    local kexp_filename = "@@KEXP_FILE@@"
+
+    local has_elfldr = file_exists("/savedata0/" .. elfldr_filename) or file_exists("/savedata0/elfldr-ps5.elf")
+    local has_kexp = file_exists("/savedata0/" .. kexp_filename) or file_exists("/savedata0/kexp.bin")
+
+    if not has_elfldr or not has_kexp then
         error("update remote_lua_loader savedata")
     end
 
