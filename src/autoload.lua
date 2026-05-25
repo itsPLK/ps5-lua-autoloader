@@ -57,15 +57,6 @@ function load_and_run_lua(path)
 end
 
 function elf_sender:load_from_file(filepath)
-    if not elf_loader_active then
-        start_elf_loader()
-        sleep(4000, "ms")
-        if not elf_loader_active then
-            print("[-] elf loader not active, cannot send elf")
-            send_ps_notification("[-] elf loader not active, cannot send elf")
-            return
-        end
-    end
 
     if file_exists(filepath) then
         print("Loading elf from:", filepath)
@@ -133,6 +124,45 @@ function elf_sender:send_to_localhost(port)
 end
 
 
+function wait_for_elfldr()
+    local loader_active = false
+    for i = 1, 50 do
+        local sockfd = syscall.socket(AF_INET, SOCK_STREAM, 0):tonumber()
+        if sockfd >= 0 then
+            local enable = memory.alloc(4)
+            memory.write_dword(enable, 1)
+            syscall.setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, enable, 4)
+
+            -- Prepare sockaddr for 127.0.0.1:9021
+            local sockaddr = memory.alloc(16)
+            memory.write_byte(sockaddr + 0, 16) -- sin_len
+            memory.write_byte(sockaddr + 1, AF_INET) -- sin_family
+            memory.write_word(sockaddr + 2, elf_sender:htons(9021)) -- sin_port
+            memory.write_byte(sockaddr + 4, 127) -- 127.0.0.1
+            memory.write_byte(sockaddr + 5, 0)
+            memory.write_byte(sockaddr + 6, 0)
+            memory.write_byte(sockaddr + 7, 1)
+
+            local connect_ret = syscall.connect(sockfd, sockaddr, 16):tonumber()
+            syscall.close(sockfd)
+
+            if connect_ret >= 0 then
+                loader_active = true
+                break
+            end
+        end
+        sleep(200, "ms")
+    end
+
+    if not loader_active then
+        print("[ERROR] autoloader: elf_loader is not active")
+        send_ps_notification("[ERROR] autoloader:\nelf_loader is not active")
+    else
+        print("[+] autoloader: elf_loader is active")
+    end
+end
+
+
 function main()
     if not is_jailbroken() then
         send_ps_notification("Jailbreak failed.\nClosing game...")
@@ -165,6 +195,12 @@ function main()
         return
     end
 
+    if not IS_KEXP then
+        start_elf_loader()
+    end
+
+    wait_for_elfldr()
+
     print("Loading autoload config from:", existing_path .. autoload.options.autoload_config)
     if SHOW_DEBUG_NOTIFICATIONS then
         send_ps_notification("Loading autoload config from: \n" .. existing_path .. autoload.options.autoload_config)
@@ -188,25 +224,6 @@ function main()
             end
             print(string.format("Sleeping for: %s ms", sleep_time))
             sleep(sleep_time, "ms")
-
-        elseif config_line == "elfldr.elf" then
-            local full_path = existing_path .. config_line
-            if not elf_loader_active then
-                if file_exists(full_path) then
-                    print("Starting ELF Loader from:", full_path)
-                    send_ps_notification("Starting ELF Loader from: \n" .. full_path)
-                    start_elf_loader(full_path)
-                    sleep(4000, "ms")
-                    if not elf_loader_active then
-                        print("[-] elf loader not active, cannot send elf")
-                        send_ps_notification("[-] elf loader not active, cannot send elf")
-                        return
-                    end
-                else
-                    print("[ERROR] File not found:", full_path)
-                    send_ps_notification("[ERROR] File not found: \n" .. full_path)
-                end
-            end
 
         elseif config_line:sub(-4) == ".elf" or config_line:sub(-4) == ".bin" then
             local full_path = existing_path .. config_line

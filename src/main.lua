@@ -428,6 +428,8 @@ function main()
         return
     end
 
+    IS_KEXP = (kernel_exploit_lua == "p2jb.lua")
+
     thread.init()
 
     kernel_offset = get_kernel_offset()
