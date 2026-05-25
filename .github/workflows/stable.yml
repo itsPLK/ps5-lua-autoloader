@@ -43,7 +43,7 @@ jobs:
           name: ${{ steps.get_version.outputs.title }}
           prerelease: false
           body: |
-            - ### Changelog:
+            ### Changelog:
 
             **Full Changelog (since last stable release)**: https://github.com/itsPLK/ps5-lua-autoloader/compare/${{ steps.get_version.outputs.last_stable_tag }}...${{ steps.get_version.outputs.version }}
 
