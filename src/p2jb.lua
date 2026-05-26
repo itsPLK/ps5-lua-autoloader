@@ -192,7 +192,7 @@ local function p2jb()
     local TRIPLEFREE_ATTEMPTS = 8
     local DEBUG_RUN_WAIT_FOR_BUMP_FROM_ELF = false -- change this if you want to bump the ucred ref count by hand, it will wait for you for 20 seconds
     local FREE_FDS_NUM = 0x13
-    local KQUEUE_EX_AMNT = 0x100000001 - FREE_FDS_NUM
+    local KQUEUE_EX_AMNT = 0x100000001 - FREE_FDS_NUM + 0x3
     local UIO_SYSSPACE = 1
     local FIND_TRIPLET_FAST = 5000
 
