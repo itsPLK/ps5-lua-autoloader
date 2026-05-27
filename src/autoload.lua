@@ -263,8 +263,8 @@ function main()
     end
     config:close()
 
-    send_ps_notification("Loader finished!\n\nClosing game...")
-    syscall.kill(syscall.getpid(), 15)
+    send_ps_notification("Loader finished!")
+    --syscall.kill(syscall.getpid(), 15)
 end
 
 
