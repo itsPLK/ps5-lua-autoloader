@@ -29,23 +29,23 @@
 
 ## 🎮 Game Compatibility & Availability
 
-| Game Title                                   | TITLE ID   | Link                                                                                          | Price | Available |
-|----------------------------------------------|------------|-----------------------------------------------------------------------------------------------|-------|-----------|
-| Raspberry Cube                               | CUSA16074  | [Play-Asia](https://www.play-asia.com/en/search/Raspberry+Cube)                               | 23.7  | ✅ TRUE   |
-| Aibeya                                       | CUSA17068  | [Play-Asia](https://www.play-asia.com/en/search/Aibeya)                                       | N/A   | ❌ FALSE  |
-| Hamidashi Creative                           | CUSA27389  | [Play-Asia](https://www.play-asia.com/en/search/Hamidashi+Creative)                           | 23.7  | ✅ TRUE   |
-| Hamidashi Creative Demo                      | CUSA27390  | [Play-Asia](https://www.play-asia.com/en/search/Hamidashi+Creative+Demo)                      | 23.7  | ✅ TRUE   |
-| Aikagi Kimi to Issho ni Pack                 | CUSA16229  | [Play-Asia](https://www.play-asia.com/en/search/Aikagi+Kimi+to+Issho+ni+Pack)                 | N/A   | ❌ FALSE  |
-| Aikagi 2                                     | CUSA19556  | [Play-Asia](https://www.play-asia.com/en/search/Aikagi+2)                                     | N/A   | ❌ FALSE  |
-| IxSHE Tell                                   | CUSA17112  | [Play-Asia](https://www.play-asia.com/en/search/IxSHE+Tell)                                   | N/A   | ❌ FALSE  |
-| Nora Princess and Stray Cat Heart HD         | CUSA13303  | [Play-Asia](https://www.play-asia.com/en/search/Nora+Princess+and+Stray+Cat+Heart+HD)         | N/A   | ❌ FALSE  |
-| Jinki Resurrection                           | CUSA25179  | [Play-Asia](https://www.play-asia.com/en/search/Jinki+Resurrection)                           | N/A   | ❌ FALSE  |
-| Fuyu Kiss                                    | CUSA29745  | [Play-Asia](https://www.play-asia.com/en/search/Fuyu+Kiss)                                    | N/A   | ❌ FALSE  |
-| Nora Princess and Crying Cat 2               | CUSA13586  | [Play-Asia](https://www.play-asia.com/en/search/Nora+Princess+and+Crying+Cat+2)               | N/A   | ❌ FALSE  |
-| Haruoto Alice Gram Snow Drop                 | CUSA14324  | [Play-Asia](https://www.play-asia.com/en/search/Haruoto+Alice+Gram+Snow+Drop)                 | N/A   | ❌ FALSE  |
-| Tonari ni Kanojo no Iru Shiawase Winter Guest| CUSA11977  | [Play-Asia](https://www.play-asia.com/en/search/Tonari+ni+Kanojo+no+Iru+Shiawase+Winter+Guest)| N/A   | ❌ FALSE  |
-| Mikagami Sumika no Seifuku Katsudou          | CUSA11481  | [Play-Asia](https://www.play-asia.com/en/search/Mikagami+Sumika+no+Seifuku+Katsudou)          | N/A   | ❌ FALSE  |
-| Aerial Life                                  | CUSA17122  | [Play-Asia](https://www.play-asia.com/en/search/Aerial+Life)                                  | N/A   | ❌ FALSE  |
+| Game Title                                   | TITLE ID   | Link                                                                                          | Price in USD | Available |
+|----------------------------------------------|------------|-----------------------------------------------------------------------------------------------|-------       |-----------|
+| Raspberry Cube                               | CUSA16074  | [Play-Asia](https://www.play-asia.com/en/search/Raspberry+Cube)                               | 63           | ✅ TRUE   |
+| Aibeya                                       | CUSA17068  | [Play-Asia](https://www.play-asia.com/en/search/Aibeya)                                       | N/A          | ❌ FALSE  |
+| Hamidashi Creative                           | CUSA27389  | [Play-Asia](https://www.play-asia.com/en/search/Hamidashi+Creative)                           | 63           | ✅ TRUE   |
+| Hamidashi Creative Demo                      | CUSA27390  | [Play-Asia](https://www.play-asia.com/en/search/Hamidashi+Creative+Demo)                      | 63           | ✅ TRUE   |
+| Aikagi Kimi to Issho ni Pack                 | CUSA16229  | [Play-Asia](https://www.play-asia.com/en/search/Aikagi+Kimi+to+Issho+ni+Pack)                 | N/A          | ❌ FALSE  |
+| Aikagi 2                                     | CUSA19556  | [Play-Asia](https://www.play-asia.com/en/search/Aikagi+2)                                     | N/A          | ❌ FALSE  |
+| IxSHE Tell                                   | CUSA17112  | [Play-Asia](https://www.play-asia.com/en/search/IxSHE+Tell)                                   | N/A          | ❌ FALSE  |
+| Nora Princess and Stray Cat Heart HD         | CUSA13303  | [Play-Asia](https://www.play-asia.com/en/search/Nora+Princess+and+Stray+Cat+Heart+HD)         | N/A          | ❌ FALSE  |
+| Jinki Resurrection                           | CUSA25179  | [Play-Asia](https://www.play-asia.com/en/search/Jinki+Resurrection)                           | N/A          | ❌ FALSE  |
+| Fuyu Kiss                                    | CUSA29745  | [Play-Asia](https://www.play-asia.com/en/search/Fuyu+Kiss)                                    | N/A          | ❌ FALSE  |
+| Nora Princess and Crying Cat 2               | CUSA13586  | [Play-Asia](https://www.play-asia.com/en/search/Nora+Princess+and+Crying+Cat+2)               | N/A          | ❌ FALSE  |
+| Haruoto Alice Gram Snow Drop                 | CUSA14324  | [Play-Asia](https://www.play-asia.com/en/search/Haruoto+Alice+Gram+Snow+Drop)                 | N/A          | ❌ FALSE  |
+| Tonari ni Kanojo no Iru Shiawase Winter Guest| CUSA11977  | [Play-Asia](https://www.play-asia.com/en/search/Tonari+ni+Kanojo+no+Iru+Shiawase+Winter+Guest)| N/A          | ❌ FALSE  |
+| Mikagami Sumika no Seifuku Katsudou          | CUSA11481  | [Play-Asia](https://www.play-asia.com/en/search/Mikagami+Sumika+no+Seifuku+Katsudou)          | N/A          | ❌ FALSE  |
+| Aerial Life                                  | CUSA17122  | [Play-Asia](https://www.play-asia.com/en/search/Aerial+Life)                                  | N/A          | ❌ FALSE  |
 
 > **Note:** Demos require the latest firmware to download from PSN.
 
