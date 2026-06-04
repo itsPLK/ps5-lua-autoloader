@@ -1,7 +1,7 @@
 <h1 align="center">PS5 Lua Autoloader</h1>
 <h3 align="center">Fork of <a href="https://github.com/shahrilnet/remote_lua_loader">remote_lua_loader</a></h3>
 &nbsp;
-<p align="center">Automatically loads your .elf, .bin and .lua payloads.<br>Supports PS5 firmwares up to 12.70.</p>
+<p align="center">Automatically loads your .elf, .bin and .lua payloads.<br>Supports PS5 firmwares up to 10.01.</p>
 
 <p align="center">
     <b>Other Autoloaders:</b><br>
