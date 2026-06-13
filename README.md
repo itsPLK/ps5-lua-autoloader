@@ -12,19 +12,35 @@
 
 
 ## How to use
+
+There are two ways to use the autoloader:
+
+### 🟢 Option 1: Payload Manager
+
+If no `autoload.txt` config is found, the autoloader will automatically launch **[Payload Manager](https://github.com/itsPLK/ps5-payload-manager)** — a fully-featured PS5 payload manager with a web UI. This lets you configure and send payloads directly from your browser, without needing to manually set up config files or transfer ELF files ahead of time.
+
+Just run the autoloader — if there's nothing configured, Payload Manager starts automatically.
+
+> **Note:** Payload Manager also has its own built-in autoload feature, which lets you configure payloads to load automatically on startup — all managed through its web UI. This is separate from the `autoload.txt` mechanism described below.
+
+---
+
+### ⚙️ Option 2: Manual Config (`autoload.txt`)
+
+For a fixed, automated payload chain, you can configure payloads manually:
+
 * Create a directory named `ps5_autoloader`.
-* Inside this directory, place your .elf/.bin/.lua files, and an `autoload.txt` file.
+* Inside this directory, place your `.elf` / `.bin` files, and an `autoload.txt` file.
     * In autoload.txt, list the files you want to load (one per line).
     * Filenames are case-sensitive - make sure the names exactly match your files.
     * You can add lines like `!1000` to make the loader wait 1000ms before sending the next payload.
-    * Note: Do not put kernel exploit or elfldr in `autoload.txt`, as they are loaded automatically.
 * Put the `ps5_autoloader` directory in one of these locations:
     * In the root of a USB drive
     * In the internal drive at `/data/ps5_autoloader`
-    * In the game’s savedata folder
 * Import savedata to your game:  
   Follow the steps in [SETUP.md](SETUP.md) to prepare and import the savedata for your Lua-compatible game.
-   
+
+> **Note:** When an `autoload.txt` config is found, Payload Manager is **not** launched automatically. If you also want Payload Manager available, place `pldmgr.elf` in your `ps5_autoloader` directory and add it to `autoload.txt`.
 
 ## Game Compatibility
 
@@ -61,28 +77,24 @@ If you have the savedata setup and want to update the files, please refer to [UP
 ## Additional Info
 
 <Details>
-<Summary><i>How to use a custom ELF Loader version?</i></Summary>
+<Summary><i>How to use custom ELF Loader version?</i></Summary>
 
 By default, the autoloader uses a custom version of **elfldr** that only accepts connections from the PS5 itself (localhost). This improves security by preventing other devices on your network from sending payloads to your console.
 
 If you want to use a "normal" ELF Loader that allows sending payloads from any device:
-1. Place your `elfldr.elf` in the `ps5_autoloader` directory.
-2. Add `elfldr.elf` as the **first** line in your `autoload.txt`.
-</Details>
+1. Place your custom ELF Loader (e.g. `elfldr.elf`) in the `ps5_autoloader` directory.
+2. Add `elfldr.elf` to your `autoload.txt`.
+3. **Note**: If you are loading other payloads right after `elfldr.elf` in your `autoload.txt`, add a sleep command immediately after it (like `!4000` to sleep for 4 seconds) to give the new ELF Loader time to start up and listen before subsequent payloads are sent.
 
-<Details>
-<Summary><i>etaHEN loading stability issues</i></Summary>
-
-Sometimes etaHEN will fail to load. It seems that etaHEN/kstuff often won't finish loading until the game app is closed.
-
-**Recommended Solution:**
-The autoloader includes **Payload Manager**. Using it is the most reliable way to load etaHEN/kstuff, as it waits for the game app to close before sending the payloads. To use it, make `pldmgr.elf` the **only** item in your `autoload.txt`.
-
-**Alternative Workarounds:**
-- Disable etaHEN toolbox automatic injecting.
-- Load etaHEN without kstuff and then load kstuff separately.
-- Minimize the game app (by holding the PS button) after running lapse but before etaHEN loads.
-- Add a delay before loading etaHEN to give yourself more time to minimize.
+Example `autoload.txt`:
+```text
+# Load custom ELF Loader
+elfldr.elf
+# Give it 4 seconds to start up (only needed if sending more payloads)
+!4000
+# Send other payloads
+ftpsrv.elf
+```
 </Details>
 
 

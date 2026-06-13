@@ -54,7 +54,7 @@ jobs:
             This build integrates the following external dependency versions:
             - [itsPLK/ps5-elfldr](https://github.com/itsPLK/ps5-elfldr): [${{ steps.build_package.outputs.elfldr_ver }}](https://github.com/itsPLK/ps5-elfldr/releases/tag/${{ steps.build_package.outputs.elfldr_ver }})
             - [itsPLK/ps5-kexp](https://github.com/itsPLK/ps5-kexp): [${{ steps.build_package.outputs.kexp_ver }}](https://github.com/itsPLK/ps5-kexp/releases/tag/${{ steps.build_package.outputs.kexp_ver }})
-            - [itsPLK/ps5-payload-manager](https://github.com/itsPLK/ps5-payload-manager): [${{ steps.build_package.outputs.pldmgr_ver }}](https://github.com/itsPLK/ps5-payload-manager/releases/tag/${{ steps.build_package.outputs.pldmgr_ver }})
+            - [itsPLK/ps5-unified-autoloader](https://github.com/itsPLK/ps5-unified-autoloader): [${{ steps.build_package.outputs.unified_autoloader_ver }}](https://github.com/itsPLK/ps5-unified-autoloader/releases/tag/${{ steps.build_package.outputs.unified_autoloader_ver }})
 
             </details>
           files: 'ps5-lua-autoloader-*.zip'
