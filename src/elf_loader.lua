@@ -10,7 +10,6 @@
 elf_loader = {}
 
 elf_loader.options = {
-    elf_dirname = "ps5_lua_loader", -- directory where elfldr.elf is located
     elf_filename = "@@ELFLDR_FILE@@",
 }
 
@@ -228,12 +227,15 @@ end
 
 
 
-function start_elf_loader(custom_path)
 
-    if elf_loader_active then
-        print("elf_loader already loaded")
+
+function start_elf_loader(custom_path)
+    if is_port_open(9021) then
+        print("elf_loader already running (port 9021 open). Skipping startup.")
         return
     end
+
+
 
     check_jailbroken()
 
@@ -247,23 +249,15 @@ function start_elf_loader(custom_path)
     })
 
     run_with_ps5_syscall_enabled(function()
-        local elf_dirname = elf_loader.options.elf_dirname
         local elf_filename = elf_loader.options.elf_filename
 
         local existing_path = custom_path
 
         if not existing_path then
             -- ONLY look in savedata if no custom path is provided
-            local possible_paths = {
-                get_savedata_path() .. elf_dirname .. "/" .. elf_filename,
-                get_savedata_path() .. elf_filename
-            }
-
-            for _, path in ipairs(possible_paths) do
-                if file_exists(path) then
-                    existing_path = path
-                    break
-                end
+            local path = get_savedata_path() .. elf_filename
+            if file_exists(path) then
+                existing_path = path
             end
         end
 
@@ -272,20 +266,16 @@ function start_elf_loader(custom_path)
             errorf("file not exist in savedata")
         end
 
-        elf_loader_active = true
-
-        if SHOW_DEBUG_NOTIFICATIONS then
-            send_ps_notification("Loading ELF: \n" .. existing_path)
-        end
 
         printf("loading %s from: %s", elf_filename, existing_path)
 
         local elf = elf_loader:load_from_file(existing_path)
+
         elf:run()
+
         elf:wait_for_elf_to_exit()
+
     end)
 
     print("done")
 end
-
-

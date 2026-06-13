@@ -526,3 +526,23 @@ function storage.list()
     end
     return table.concat(out, '\n')
 end
+
+function is_port_open(port)
+    local sockfd = syscall.socket(2, 1, 0):tonumber() -- AF_INET, SOCK_STREAM
+    if sockfd < 0 then return false end
+
+    local sockaddr = memory.alloc(16)
+    memory.write_byte(sockaddr + 0, 16)
+    memory.write_byte(sockaddr + 1, 2)
+    local htons_port = bit32.bor(bit32.lshift(port, 8), bit32.rshift(port, 8)) % 0x10000
+    memory.write_word(sockaddr + 2, htons_port)
+    memory.write_byte(sockaddr + 4, 127)
+    memory.write_byte(sockaddr + 5, 0)
+    memory.write_byte(sockaddr + 6, 0)
+    memory.write_byte(sockaddr + 7, 1)
+
+    local connect_ret = syscall.connect(sockfd, sockaddr, 16):tonumber()
+    syscall.close(sockfd)
+
+    return (connect_ret == 0)
+end
