@@ -17,6 +17,7 @@ ZIP_FILE     := $(ZIP_DIR_NAME).zip
 SRC_FILES := $(shell find src -type f)
 ELFLDR_FILE := $(shell basename $(shell ls src/elfldr-ps5-*.elf 2>/dev/null | head -n 1) 2>/dev/null)
 KEXP_FILE := $(shell basename $(shell ls src/kexp-*.bin 2>/dev/null | head -n 1) 2>/dev/null)
+UNIFIED_AUTOLOADER_FILE := $(shell basename $(shell ls src/ps5-unified-autoloader*.elf 2>/dev/null | head -n 1) 2>/dev/null)
 
 all: $(ZIP_FILE)
 
@@ -31,6 +32,8 @@ $(ZIP_FILE): $(SRC_FILES)
 	# Replace elfldr and kexp filenames in p2jb.lua
 	sed -i.bak "s/@@ELFLDR_FILE@@/$(ELFLDR_FILE)/g" build_dir/$(ZIP_DIR_NAME)/p2jb.lua && rm build_dir/$(ZIP_DIR_NAME)/p2jb.lua.bak
 	sed -i.bak "s/@@KEXP_FILE@@/$(KEXP_FILE)/g" build_dir/$(ZIP_DIR_NAME)/p2jb.lua && rm build_dir/$(ZIP_DIR_NAME)/p2jb.lua.bak
+	# Replace unified autoloader filename in autoload.lua
+	sed -i.bak "s/@@UNIFIED_AUTOLOADER_FILE@@/$(UNIFIED_AUTOLOADER_FILE)/g" build_dir/$(ZIP_DIR_NAME)/autoload.lua && rm build_dir/$(ZIP_DIR_NAME)/autoload.lua.bak
 	(cd build_dir && zip -r ../$(ZIP_FILE) $(ZIP_DIR_NAME))
 	rm -rf build_dir
 	echo "Created $(ZIP_FILE)"
